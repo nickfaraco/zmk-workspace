@@ -8,6 +8,9 @@
 #else
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
 #endif
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/bt.h>
+#include <behaviors/num_word.dtsi> // requires auto-layer module
 
 
 // layers ID definition
@@ -193,6 +196,24 @@
             bindings = <&mo>, <&spc_morph>;
         };
 
+        // Smart-num layer
+        // tap: num-word | double-tap: sticky num-layer | hold: num-layer
+        #define SMART_NUM &smart_num NUM 0
+        smart_num: smart_num {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <TAP_TERM_MS>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            flavor = "balanced";
+            bindings = <&mo>, <&num_dance>;
+        };
+        num_dance: num_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <TAP_TERM_MS>;
+            bindings = <&num_word NUM>, <&sl NUM>;
+        };
+
         // Alt+Tab swapper, requires PR #1366
         swapper: swapper{
             compatible = "zmk,behavior-tri-state";
@@ -300,7 +321,7 @@
              //├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
                 LBL            &kp C          &kp G          &kp D          LBR                  RBL            &kp M          &comma_semi    &dot_colon     RBR
              //╰──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
-                                              xxx            &sl NUM        &lt_spc NAV 0        &lt SYM E      &lt_shft meh 0 xxx
+                                              xxx            SMART_NUM      &lt_spc NAV 0        &lt SYM E      &lt_shft meh 0 xxx
              //                              ╰──────────────┴──────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
             >;
         };
