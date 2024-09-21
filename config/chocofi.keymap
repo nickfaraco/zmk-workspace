@@ -1,0 +1,9 @@
+/* activate bluetooth */
+#define WIRELESS 1
+
+/* define layout */
+#define ALPHA_23332 1
+#define MOUSE_KEYS 1
+
+/* source the main keymap */
+#include "base.keymap"
