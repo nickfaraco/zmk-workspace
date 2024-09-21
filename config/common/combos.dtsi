@@ -1,0 +1,70 @@
+/*                KEY POSITIONS
+  ╭─────────────────────╮ ╭─────────────────────╮
+  │  00  01  02  03  04 │ │  05  06  07  08  09 │
+  │  10  11  12  13  14 │ │  15  16  17  18  19 │
+  │  20  21  22  23  24 │ │  25  26  27  28  29 │
+  ╰───────╮  30  31  32 │ │  33  34  35 ╭───────╯
+          ╰─────────────╯ ╰─────────────╯ */
+
+#define ALL 0xff
+#define MS_FAST 20
+#define MS_SLOW 50
+// use global-quick-tap-ms for combos (requires PR 1387)
+#define COMBO_HOOK global-quick-tap-ms = <75>;
+
+// just for drawing purposes
+#ifndef DUMMY_KEEB
+#define DUMMY_KEEB 0
+#endif
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+#define CONCAT2(x, y) x ## y
+#define CONCAT(x, y) CONCAT2(x, y)
+#define COMBO(name, pos, k, l, t) CONCAT(combo_, name) { key-positions = <pos>; bindings = <k>; layers = <l>; timeout-ms = <t>; require-prior-idle-ms=<100>;};
+    // missing letters
+    #if ALPHA_23332 || ALPHA_13332 || DUMMY_KEEB
+        COMBO(q, 2 3, &kp Q, BASE BASE_WIN, MS_SLOW)
+        COMBO(z, 1 2, &kp Z, BASE BASE_WIN, MS_SLOW)
+    #endif
+    // left-hand side combos
+        // COMBO(quit, 1 2, &kp LG(Q), BASE)
+        // COMBO(cltab, 2 3, &kp LG(W), BASE)
+        COMBO(tab, 11 12, &kp TAB, BASE BASE_WIN, MS_FAST)
+        COMBO(esc, 11 12 13, &esc_kcancel, BASE BASE_WIN, MS_SLOW)
+        COMBO(ret, 12 13, &kp RET, BASE BASE_WIN, MS_FAST)
+        COMBO(copy, 21 22, &kp LG(C), BASE, MS_SLOW)
+        COMBO(paste, 22 23, &kp LG(V), BASE, MS_SLOW)
+        COMBO(cut, 21 22 23, &kp LG(X), BASE, MS_SLOW)
+        COMBO(undo, 10 11, &kp LG(Z), BASE, MS_FAST)
+        COMBO(redo, 13 14, &kp LG(LS(Z)), BASE, MS_FAST)
+        COMBO(copy_win, 21 22, &kp LC(C), BASE_WIN, MS_SLOW)
+        COMBO(paste_win, 22 23, &kp LC(V), BASE_WIN, MS_SLOW)
+        COMBO(cut_win, 21 22 23, &kp LC(X), BASE_WIN, MS_SLOW)
+        COMBO(undo_win, 10 11, &kp LC(Z), BASE_WIN, MS_FAST)
+        COMBO(redo_win, 13 14, &kp LC(LS(Z)), BASE_WIN, MS_FAST)
+    // right-hand side combos
+        // COMBO(ret, 16 17 18, &kp RET, BASE)
+        // parenthesis combos
+        COMBO(lpar, 16 17, &kp LPAR, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        COMBO(rpar, 17 18, &kp RPAR, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        // brackets combos
+        COMBO(lbkt, 26 27, &kp LBKT, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        COMBO(rbkt, 27 28, &kp RBKT, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        // braces combos
+        COMBO(lbrc, 15 16, &kp LBRC, BASE BASE_WIN SYM SYMW NUM, MS_SLOW)
+        COMBO(rbrc, 18 19, &kp RBRC, BASE BASE_WIN SYM SYMW NUM, MS_SLOW)
+        // delete actions
+        COMBO(bspc, 6 7, &kp BSPC, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
+        COMBO(del, 6 8, &kp DEL, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
+        COMBO(del_word, 6 7 8, &kp LA(BSPC), BASE, MS_SLOW)
+        COMBO(del_line, 6 7 8, &del_line, NAV NAVW, MS_FAST)
+        COMBO(del_word_win, 6 7 8, &kp LC(BSPC), BASE_WIN, MS_FAST)
+    // mouse layer
+        COMBO(mouse, 10 32, &mo MSE, BASE BASE_WIN, MS_SLOW)
+    // symbol one-shot layer
+        COMBO(ossym, 7 8, &sl SYM, BASE, MS_SLOW)
+        COMBO(ossymw, 7 8, &sl SYMW, BASE_WIN, MS_SLOW)
+    };
+};
