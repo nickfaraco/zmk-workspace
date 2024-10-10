@@ -31,9 +31,9 @@
     // left-hand side combos
         // COMBO(quit, 1 2, &kp LG(Q), BASE)
         // COMBO(cltab, 2 3, &kp LG(W), BASE)
-        COMBO(tab, 11 12, &kp TAB, BASE BASE_WIN, MS_FAST)
+        COMBO(tab, 11 12, &kp TAB, BASE BASE_WIN NUM NUMF, MS_FAST)
         COMBO(esc, 11 12 13, &esc_kcancel, BASE BASE_WIN, MS_SLOW)
-        COMBO(ret, 12 13, &kp RET, BASE BASE_WIN, MS_FAST)
+        COMBO(ret, 12 13, &kp RET, BASE BASE_WIN NUM NUMF, MS_FAST)
         COMBO(copy, 21 22, &kp LG(C), BASE, MS_SLOW)
         COMBO(paste, 22 23, &kp LG(V), BASE, MS_SLOW)
         COMBO(cut, 21 22 23, &kp LG(X), BASE, MS_SLOW)
@@ -47,14 +47,14 @@
     // right-hand side combos
         // COMBO(ret, 16 17 18, &kp RET, BASE)
         // parenthesis combos
-        COMBO(lpar, 16 17, &kp LPAR, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
-        COMBO(rpar, 17 18, &kp RPAR, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        COMBO(lpar, 16 17, &kp LPAR, BASE BASE_WIN SYM SYMW NUM NUMF, MS_FAST)
+        COMBO(rpar, 17 18, &kp RPAR, BASE BASE_WIN SYM SYMW NUM NUMF, MS_FAST)
         // brackets combos
-        COMBO(lbkt, 26 27, &kp LBKT, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
-        COMBO(rbkt, 27 28, &kp RBKT, BASE BASE_WIN SYM SYMW NUM, MS_FAST)
+        COMBO(lbkt, 26 27, &kp LBKT, BASE BASE_WIN SYM SYMW NUM NUMF, MS_FAST)
+        COMBO(rbkt, 27 28, &kp RBKT, BASE BASE_WIN SYM SYMW NUM NUMF, MS_FAST)
         // braces combos
-        COMBO(lbrc, 15 16, &kp LBRC, BASE BASE_WIN SYM SYMW NUM, MS_SLOW)
-        COMBO(rbrc, 18 19, &kp RBRC, BASE BASE_WIN SYM SYMW NUM, MS_SLOW)
+        COMBO(lbrc, 15 16, &kp LBRC, BASE BASE_WIN SYM SYMW NUM NUMF, MS_SLOW)
+        COMBO(rbrc, 18 19, &kp RBRC, BASE BASE_WIN SYM SYMW NUM NUMF, MS_SLOW)
         // delete actions
         COMBO(bspc, 6 7, &kp BSPC, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
         COMBO(del, 6 8, &kp DEL, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
