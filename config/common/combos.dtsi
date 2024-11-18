@@ -56,8 +56,8 @@
         COMBO(lbrc, 15 16, &kp LBRC, BASE BASE_WIN SYM SYMW NUM NUMF, MS_SLOW)
         COMBO(rbrc, 18 19, &kp RBRC, BASE BASE_WIN SYM SYMW NUM NUMF, MS_SLOW)
         // delete actions
-        COMBO(bspc, 6 7, &kp BSPC, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
-        COMBO(del, 6 8, &kp DEL, BASE BASE_WIN NAV NAVW NUM, MS_SLOW)
+        COMBO(bspc, 6 7, &kp BSPC, BASE BASE_WIN NAV NAVW NUM NUMF, MS_SLOW)
+        COMBO(del, 6 8, &kp DEL, BASE BASE_WIN NAV NAVW NUM NUMF, MS_SLOW)
         COMBO(del_word, 6 7 8, &kp LA(BSPC), BASE, MS_SLOW)
         COMBO(del_line, 6 7 8, &del_line, NAV NAVW, MS_FAST)
         COMBO(del_word_win, 6 7 8, &kp LC(BSPC), BASE_WIN, MS_FAST)
