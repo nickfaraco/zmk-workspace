@@ -15,10 +15,10 @@
 #define RBL &none
 #define RBR &none
 #elif ALPHA_23332
-#define LTL &none
+#define LTL &kp ESC
 #define LBL &kp V
 #define LBR &none
-#define RTR &none
+#define RTR &kp RET
 #define RBL &none
 #define RBR &single_to_doublequote
 #else // full 3x5 matrix
