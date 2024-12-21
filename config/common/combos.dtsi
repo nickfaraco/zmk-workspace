@@ -10,7 +10,7 @@
 #define MS_FAST 20
 #define MS_SLOW 50
 // use global-quick-tap-ms for combos (requires PR 1387)
-#define HOOK global-quick-tap-ms = <50>;
+#define COMBO_HOOK global-quick-tap-ms = <50>;
 
 // just for drawing purposes
 #ifndef DUMMY_KEEB
