@@ -76,3 +76,10 @@ ZMK_MACRO(macro_euro_win,
         , <&macro_release &kp LALT>
         ;
 )
+
+ZMK_MACRO(macro_qu,
+    bindings = <&kp Q &kp U>;
+)
+
+// Sticky shift + leader
+ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
