@@ -1,0 +1,32 @@
+#undef ZMK_LEADER_SEQUENCE
+#define ZMK_LEADER_SEQUENCE(name, leader_bindings, leader_sequence) \
+    / { \
+        behaviors { \
+            leader: leader { \
+                compatible = "zmk,behavior-leader-key"; \
+                #binding-cells = <0>; \
+                ignore-keys = <LSHFT RSHFT>; \
+                leader_sequence_ ## name { \
+                    bindings = <leader_bindings>; \
+                    sequence = <leader_sequence>; \
+                }; \
+            }; \
+        }; \
+    };
+
+
+ZMK_MACRO(macro_egra, bindings = <&kp RA(GRAVE) &kp E>;)
+ZMK_MACRO(macro_eacu, bindings = <&kp RA(E) &kp E>;)
+ZMK_MACRO(macro_agra, bindings = <&kp RA(GRAVE) &kp A>;)
+ZMK_MACRO(macro_igra, bindings = <&kp RA(GRAVE) &kp I>;)
+ZMK_MACRO(macro_ogra, bindings = <&kp RA(GRAVE) &kp O>;)
+ZMK_MACRO(macro_ugra, bindings = <&kp RA(GRAVE) &kp U>;)
+
+ZMK_LEADER_SEQUENCE(egra, &macro_egra, E)
+ZMK_LEADER_SEQUENCE(eacu, &macro_eacu, N E)
+ZMK_LEADER_SEQUENCE(agra, &macro_agra, A)
+ZMK_LEADER_SEQUENCE(igra, &macro_igra, I)
+ZMK_LEADER_SEQUENCE(ogra, &macro_ogra, O)
+ZMK_LEADER_SEQUENCE(ugra, &macro_ugra, U)
+
+ZMK_LEADER_SEQUENCE(prcnt, &kp PERCENT, P E R C)
