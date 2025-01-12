@@ -13,9 +13,8 @@
 #define COMBO_HOOK global-quick-tap-ms = <50>;
 
 // missing letters
-ZMK_COMBO(v,            &kp V,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(q,            &kp Q,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(v,            &kp V,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(z,            &kp Z,                  LT0 LM0,      BASE BASE_WIN,                    MS_SLOW)
 
