@@ -16,7 +16,7 @@
 ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(z,            &kp Z,                  LT0 LM0,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    MS_SLOW)
 
 /* left-hand side horizontal combos */
 // middle row
@@ -52,6 +52,7 @@ ZMK_COMBO(rbrk,         &brk_to_brc_right,      RB2 RB3,      BASE BASE_WIN NUM 
 ZMK_COMBO(and,          &kp AMPS,               LT3 LM3,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(at,           &kp AT,                 LT2 LM2,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(caret,        &kp CARET,              LT1 LM1,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(perc,         &kp PERCENT,            LT0 LM0,      BASE BASE_WIN,                    MS_SLOW)
 // lower
 ZMK_COMBO(pipe,         &kp PIPE,               LM3 LB3,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(bslh,         &kp BSLH,               LM2 LB2,      BASE BASE_WIN,                    MS_SLOW)
