@@ -178,6 +178,34 @@ ZMK_TAP_DANCE(lockscr_win,
 )
 
 
+/* Nav cluster */
+
+// long-tap action on hold, short-tap action on all interrupts
+#define MT_CORE \
+    flavor = "tap-preferred"; \
+    tapping-term-ms = <220>; \
+    quick-tap-ms = <220>; \
+    hold-trigger-key-positions = <0>;
+
+&mt { MT_CORE };
+ZMK_HOLD_TAP(mt_home, bindings = <&masked_home>, <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
+
+#define NAV_LEFT  &mt_home 0   LEFT    // tap: left  | long-tap: beginning of line
+#define NAV_RIGHT &mt_end 0    RIGHT   // tap: right | long-tap: end       of line
+#define NAV_UP    &mt LC(HOME) UP      // tap: up    | long-tap: beginning of document
+#define NAV_DOWN  &mt LC(END)  DOWN    // tap: down  | long-tap: end       of document
+
+// mask CTRL when holding left/right to avoid accidental jumps to beginning/end of document
+#define MASK_MODS(NAME, MODS, BINDING) \
+    ZMK_MOD_MORPH(NAME, \
+        bindings = <BINDING>, <BINDING>; \
+        mods = <MODS>; \
+    )
+MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
+MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
+
+
 // Smart-num layer
 // tap: num-word | double-tap: sticky num-layer | hold: num-layer
 #define SMART_NUM &smart_num NUMF 0
@@ -212,24 +240,6 @@ ZMK_MOD_MORPH(esc_kcancel,
 ZMK_MOD_MORPH(dot_colon,
     bindings = <&kp DOT>, <&kp COLON>;
     mods = <(MOD_RSFT)>;
-)
-ZMK_MOD_MORPH(left_home,
-    bindings = <&kp LEFT>, <&left_home_nested>;
-    keep-mods = <MOD_LCTL>;
-    mods = <(MOD_LCTL|MOD_LALT)>;
-)
-ZMK_MOD_MORPH(left_home_nested,
-    bindings = <&kp LC(LEFT)>, <&kp HOME>;
-    mods = <(MOD_LCTL)>;
-)
-ZMK_MOD_MORPH(right_end,
-    bindings = <&kp RIGHT>, <&right_end_nested>;
-    keep-mods = <MOD_LCTL>;
-    mods = <(MOD_LCTL|MOD_LALT)>;
-)
-ZMK_MOD_MORPH(right_end_nested,
-    bindings = <&kp LC(RIGHT)>, <&kp END>;
-    mods = <(MOD_LCTL)>;
 )
 ZMK_MOD_MORPH(comma_semi,
     bindings = <&kp COMMA>, <&kp SEMICOLON>;
@@ -316,11 +326,11 @@ ZMK_LAYER(NUMF,
 
 ZMK_LAYER(NAV,
     //╭─────────────────┬─────────────────┬─────────────────┬────────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        xxx               &kp LG(LEFT)      &kp LG(Q)         &kp LG(W)        xxx                  &screenshot    &kp PG_DN      &kp UP         &kp PG_UP      xxx
+        xxx               &kp LG(LEFT)      &kp LG(Q)         &kp LG(W)        xxx                  &screenshot    &kp LG(LEFT)   NAV_UP         &kp LG(RIGHT)  xxx
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LCTRL LG(Z)  &hml LALT LG(X)   &hml LSHFT LG(C)  &hml LGUI LG(V)  &kp CAPS             &kp LA(DEL)    &kp LEFT       &kp DOWN       &kp RIGHT      &lockscr
+        &hml LCTRL LG(Z)  &hml LALT LG(X)   &hml LSHFT LG(C)  &hml LGUI LG(V)  &kp CAPS             &kp LA(DEL)    NAV_LEFT       NAV_DOWN       NAV_RIGHT      &lockscr
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        xxx               &kp LS(TAB)       &swapper          &kp LC(TAB)      xxx                  xxx            &kp DSK_PREV   &kp HR_APP     &kp DSK_NEXT   xxx
+        xxx               &kp LS(TAB)       &swapper          &kp LC(TAB)      xxx                  xxx            &kp PG_DN      &key_repeat    &kp PG_UP      xxx
     //╰─────────────────┴─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
                                             xxx               xxx               ___                  ___            xxx            xxx
     //                                    ╰─────────────────┴────────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
@@ -328,11 +338,11 @@ ZMK_LAYER(NAV,
 
 ZMK_LAYER(NAV_W,
     //╭─────────────────┬─────────────────┬─────────────────┬────────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        ___               &kp LA(LEFT)      &kp LA(F4)        &kp LC(W)        ___                  &kp LG(LS(S))  ___            ___            ___            ___
+        ___               &kp LA(LEFT)      &kp LA(F4)        &kp LC(W)        ___                  &kp LG(LS(S))  &kp LC(LEFT)   ___            &kp LC(RIGHT)  ___
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LGUI LC(Z)   &hml LALT LC(X)   &hml LSHFT LC(C)  &hml LCTRL LC(V) ___                  &kp LC(DEL)    &left_home     ___            &right_end     &lockscr_win
+        &hml LGUI LC(Z)   &hml LALT LC(X)   &hml LSHFT LC(C)  &hml LCTRL LC(V) ___                  &kp LC(DEL)    ___            ___            ___            &lockscr_win
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        ___               ___               &swapper_win      ___              ___                  ___            &kp DSK_PREV_W ___            &kp DSK_NEXT_W ___
+        ___               ___               &swapper_win      ___              ___                  ___            ___            ___            ___            ___
     //╰─────────────────┴─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
                                             xxx              xxx               ___                  ___            xxx            xxx
     //                                    ╰─────────────────┴────────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
