@@ -72,3 +72,6 @@ ZMK_COMBO(equal,        &kp EQUAL,              RM3 RB3,      BASE BASE_WIN NUM 
 
 // mouse layer
 ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,                    MS_SLOW)
+// minecraft layer
+ZMK_COMBO(minecraft,    &tog MINE,              LM4 LM0,      BASE BASE_WIN,                    MS_SLOW)
+
