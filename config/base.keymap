@@ -124,6 +124,14 @@ ZMK_HOLD_TAP(hmr,
     hold-trigger-on-release;             // delay positional check until key-release
 )
 
+/* hyper-key mod-tap */
+ZMK_HOLD_TAP(hmt,
+    flavor = "balanced";
+    tapping-term-ms = <280>;
+    quick-tap-ms = <175>;                // repeat on tap-into-hold
+    require-prior-idle-ms = <150>;
+    bindings = <&kp>, <&kp>;
+)
 
 /* BEHAVIORS */
 
@@ -285,7 +293,7 @@ ZMK_LAYER(APTMAK,
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         LBL            &kp C          &kp G          &kp D          LBR                  RBL            &kp M          &comma_semi    &dot_colon     RBR
     // ╰──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
-                                      xxx            SMART_NUM      &lt_spc NAV 0        &mt hyper E    &lt_shft ADJ 0 xxx
+                                      xxx            SMART_NUM      &lt_spc NAV 0        &hmt hyper E    &lt_shft ADJ 0 xxx
     //                               ╰──────────────┴──────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
 )
 
