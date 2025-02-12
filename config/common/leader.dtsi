@@ -23,10 +23,11 @@ ZMK_MACRO(macro_ogra, bindings = <&kp RA(GRAVE) &kp O>;)
 ZMK_MACRO(macro_ugra, bindings = <&kp RA(GRAVE) &kp U>;)
 
 ZMK_LEADER_SEQUENCE(egra, &macro_egra, E)
-ZMK_LEADER_SEQUENCE(eacu, &macro_eacu, N E)
+ZMK_LEADER_SEQUENCE(eacu, &macro_eacu, N)
 ZMK_LEADER_SEQUENCE(agra, &macro_agra, A)
 ZMK_LEADER_SEQUENCE(igra, &macro_igra, I)
 ZMK_LEADER_SEQUENCE(ogra, &macro_ogra, O)
 ZMK_LEADER_SEQUENCE(ugra, &macro_ugra, U)
 
-ZMK_LEADER_SEQUENCE(prcnt, &kp PERCENT, P E R C)
+ZMK_LEADER_SEQUENCE(deg_mac, &kp RA(LS(N8)), D M)
+ZMK_LEADER_SEQUENCE(deg_win, &macro_deg_win, D W)
