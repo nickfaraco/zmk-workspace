@@ -81,5 +81,10 @@ ZMK_MACRO(macro_qu,
     bindings = <&kp Q &kp U>;
 )
 
+ZMK_MACRO(macro_chat,
+    bindings = <&to BASE_WIN &kp SLASH>;
+)
+
+
 // Sticky shift + leader
 ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
