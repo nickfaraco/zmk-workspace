@@ -26,12 +26,12 @@ ZMK_COMBO(leader,       &leader,                LM2 LM1,      BASE BASE_WIN NUM 
 ZMK_COMBO(leader_sft,   &leader_sft,            LM3 LM2 LM1,  BASE BASE_WIN NUM NUMF,           MS_FAST)
 ZMK_COMBO(hash,         &kp HASH,               LM1 LM0,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
 // bottom row
-ZMK_COMBO(esc,          &esc_kcancel,           LB3 LB2,      ALL,                              MS_SLOW)
-ZMK_COMBO(ret,          &kp RET,                LB2 LB1,      ALL,                              MS_SLOW)
+ZMK_COMBO(esc,          &esc_kcancel,           LB3 LB2,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
+ZMK_COMBO(ret,          &kp RET,                LB2 LB1,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
 
 /* right-hand side horizontal combos */
 // top row
-ZMK_COMBO(bspc,         &kp BSPC,               RT1 RT2,      ALL,                              MS_SLOW)
+ZMK_COMBO(bspc,         &kp BSPC,               RT1 RT2,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
 ZMK_COMBO(del,          &kp DEL,                RT1 RT3,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
 ZMK_COMBO(del_word,     &kp LA(BSPC),           RT1 RT2 RT3,  BASE,                             MS_SLOW)
 ZMK_COMBO(del_word_win, &kp LC(BSPC),           RT1 RT2 RT3,  BASE_WIN,                         MS_SLOW)
@@ -72,6 +72,17 @@ ZMK_COMBO(equal,        &kp EQUAL,              RM3 RB3,      BASE BASE_WIN NUM 
 
 // mouse layer
 ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,                    MS_SLOW)
-// minecraft layer
-ZMK_COMBO(minecraft,    &tog MINE,              LM4 LM0,      BASE BASE_WIN,                    MS_SLOW)
 
+/* Gaming Layer */
+ZMK_COMBO(game,         &tog GAME,              LM4 LM0,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(g_n1,         &kp N1,                 LM1 LM2,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n2,         &kp N2,                 LM2 LM3,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n3,         &kp N3,                 LM1 LM2 LM3,  GAME,                             MS_FAST)
+ZMK_COMBO(g_n4,         &kp N4,                 LB1 LB2,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n5,         &kp N5,                 LB2 LB3,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n6,         &kp N6,                 LB1 LB2 LB3,  GAME,                             MS_FAST)
+ZMK_COMBO(g_n7,         &kp N7,                 LT1 LT2,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n8,         &kp N8,                 LT2 LT3,      GAME,                             MS_FAST)
+ZMK_COMBO(g_n9,         &kp N9,                 LT1 LT2 LT3,  GAME,                             MS_FAST)
+ZMK_COMBO(chat,         &macro_chat,            RM1 RM2,      GAME,                             MS_FAST)
+ZMK_COMBO(g_esc,        &kp ESCAPE,             RM2 RM3,      GAME,                             MS_FAST)
