@@ -63,7 +63,8 @@ ZMK_COMBO(under,        &kp UNDER,              LM1 LB1,      BASE BASE_WIN,    
 ZMK_COMBO(grave,        &kp GRAVE,              RT0 RM0,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(plus,         &kp PLUS,               RT1 RM1,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
 ZMK_COMBO(astrk,        &kp ASTRK,              RT2 RM2,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
-ZMK_COMBO(dllr,         &kp DLLR,               RT3 RM3,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(dllr_m,       &curr_mac,              RT3 RM3,      BASE,                             MS_SLOW)
+ZMK_COMBO(dllr_w,       &curr_win,              RT3 RM3,      BASE_WIN,                         MS_SLOW)
 // lower
 ZMK_COMBO(minus,        &kp MINUS,              RM1 RB1,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
 ZMK_COMBO(slash,        &kp SLASH,              RM2 RB2,      BASE BASE_WIN NUM NUMF,           MS_SLOW)

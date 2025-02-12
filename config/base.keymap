@@ -159,15 +159,17 @@ ZMK_HOLD_TAP( lt_spc,
     bindings = <&mo>, <&spc_morph>;
 )
 
+// Currency
+ZMK_MOD_MORPH(curr_mac,
+    bindings = <&kp DLLR>, <&kp LA(N5)>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+ZMK_MOD_MORPH(curr_win,
+    bindings = <&kp DLLR>, <&macro_euro_win>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
 // Tap Dances
-ZMK_TAP_DANCE(curr_deg,
-    tapping-term-ms = <TAP_TERM_MS>;
-    bindings = <&kp DLLR>, <&kp LA(N5)>, <&kp deg>;
-)
-ZMK_TAP_DANCE(curr_deg_win,
-    tapping-term-ms = <TAP_TERM_MS>;
-    bindings = <&kp DLLR>, <&macro_euro_win>, <&macro_deg_win>;
-)
 ZMK_TAP_DANCE(prev_next_song,
     tapping-term-ms = <TAP_TERM_MS>;
     bindings = <&kp C_NEXT>, <&kp C_PREV>;
