@@ -15,7 +15,7 @@
 // missing letters
 ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(qu,           &kp J,              LT3 LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    MS_SLOW)
 
 /* left-hand side horizontal combos */
@@ -28,6 +28,8 @@ ZMK_COMBO(hash,         &kp HASH,               LM1 LM0,      BASE BASE_WIN NUM 
 // bottom row
 ZMK_COMBO(esc,          &esc_kcancel,           LB3 LB2,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
 ZMK_COMBO(ret,          &kp RET,                LB2 LB1,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
+// thumb row
+ZMK_COMBO(adj,          &mo ADJ,                LH1 LH0,      BASE BASE_WIN,                    MS_SLOW)
 
 /* right-hand side horizontal combos */
 // top row

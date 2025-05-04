@@ -53,7 +53,7 @@
 
 // macros definition
 #define meh LG(LC(LALT))
-#define hyper LG(LC(LS(LALT)))
+#define hyp LG(LC(LS(LALT)))
 #define deg RA(LS(N8))
 #define HR_APP LG(LS(SPACE))
 #define DSK_PREV_W LG(LC(LEFT))
@@ -140,11 +140,11 @@ ZMK_MOD_MORPH(ss_cw,
     bindings = <&sk RSHFT>, <&caps_word>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
-ZMK_HOLD_TAP(lt_shft,
+ZMK_HOLD_TAP(mt_shft,
     tapping-term-ms = <TAP_TERM_MS>;
     quick-tap-ms = <QUICK_TAP_MS>;
     flavor = "balanced";
-    bindings = <&mo>, <&ss_cw>;
+    bindings = <&kp>, <&ss_cw>;
 )
 
 // tap: space | shft + tap: dot -> space -> sticky shift | hold: activate layer
@@ -287,23 +287,23 @@ ZMK_CONDITIONAL_LAYER(nav_win, BASE_WIN NAV, NAVW)
 
 /* KEYMAP */
 
-ZMK_LAYER(APTMAK,
+ZMK_LAYER(APT,
     // ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        LTL            &kp W          &kp F          &kp P          &kp B                &kp J          &kp L          &kp U          &kp Y          RTR
+        LTL            &kp Y          &kp F          &kp P          &kp K                &kp X          &kp L          &kp U          &kp O          RTR
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LCTRL R   &hml LALT S    &hml LSHIFT T  &hml LGUI H    &kp K                &kp X          &hmr RGUI N    &hmr RSHIFT A  &hmr LALT I    &hmr RCTRL O
+        &hml LCTRL R   &hml LALT S    &hml LSHIFT T  &hml LGUI H    &kp B                &kp W          &hmr RGUI N    &hmr RSHIFT E  &hmr LALT A    &hmr RCTRL I
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         LBL            &kp C          &kp G          &hml RALT D    LBR                  RBL            &hmr RALT M    &comma_semi    &dot_colon     RBR
     // ╰──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
-                                      xxx            SMART_NUM      &lt_spc NAV 0        &hmt hyper E    &lt_shft ADJ 0 xxx
+                                      xxx            SMART_NUM      &lt_spc NAV 0        &mt_shft hyp 0 xxx            xxx
     //                               ╰──────────────┴──────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
 )
 
-ZMK_LAYER(APTMAK_W,
+ZMK_LAYER(APT_W,
     // ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
         ___            ___            ___            ___            ___                  ___            ___            ___            ___            ___
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LGUI R    ___            ___            &hml LCTRL H   ___                  ___            &hmr RCTRL N   ___            ___            &hmr RGUI O
+        &hml LGUI R    ___            ___            &hml LCTRL H   ___                  ___            &hmr RCTRL N   ___            ___            &hmr RGUI I
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         ___            ___            ___            ___            ___                  ___            ___            ___            ___            ___
     // ╰──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
