@@ -53,7 +53,7 @@
 
 // macros definition
 #define meh LG(LC(LALT))
-#define hyper LG(LC(LS(LALT)))
+#define hyp LG(LC(LS(LALT)))
 #define deg RA(LS(N8))
 #define HR_APP LG(LS(SPACE))
 #define DSK_PREV_W LG(LC(LEFT))
@@ -260,7 +260,7 @@ ZMK_MOD_MORPH(quest_excl,
     bindings = <&kp QUESTION>, <&kp EXCLAMATION>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
-ZMK_MOD_MORPH(single_to_doublequote,
+ZMK_MOD_MORPH(mm_quote,
     bindings = <&kp SINGLE_QUOTE>, <&kp DOUBLE_QUOTES>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
@@ -289,13 +289,13 @@ ZMK_CONDITIONAL_LAYER(nav_win, BASE_WIN NAV, NAVW)
 
 ZMK_LAYER(APTMAK,
     // ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        LTL            &kp W          &kp F          &kp P          &kp B                &kp J          &kp L          &kp U          &kp Y          RTR
+        LTL            &kp L          &kp D          &kp W          &kp Z                &mm_quote      &kp F          &kp O          &kp U          RTR
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LCTRL R   &hml LALT S    &hml LSHIFT T  &hml LGUI H    &kp K                &kp X          &hmr RGUI N    &hmr RSHIFT A  &hmr LALT I    &hmr RCTRL O
+        &hml LCTRL N   &hml LALT R    &hml LSHIFT T  &hml LGUI S    &kp G                &kp Y          &hmr RGUI H    &hmr RSHIFT A  &hmr LALT E    &hmr RCTRL I
     // ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        LBL            &kp C          &kp G          &hml RALT D    LBR                  RBL            &hmr RALT M    &comma_semi    &dot_colon     RBR
+        LBL            &kp X          &kp M          &hml RALT C    LBR                  RBL            &hmr RALT P    &dot_colon     &comma_semi    RBR
     // ╰──────────────┴──────────────┼──────────────┼──────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
-                                      xxx            SMART_NUM      &lt_spc NAV 0        &hmt hyper E    &lt_shft ADJ 0 xxx
+                                      xxx            SMART_NUM      &lt_spc NAV 0        &hmt hyp BSPC  &lt_shft ADJ 0 xxx
     //                               ╰──────────────┴──────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯
 )
 

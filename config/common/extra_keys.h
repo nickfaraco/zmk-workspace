@@ -20,12 +20,12 @@
 #define LBR &none
 #define RTR &kp RET
 #define RBL &none
-#define RBR &single_to_doublequote
+#define RBR &mm_quote
 #else // full 3x5 matrix
-#define LTL &key_repeat
-#define LBL &kp V
-#define LBR &kp Q
-#define RTR &kp K_CANCEL
-#define RBL &kp Z
-#define RBR &single_to_doublequote
+#define LTL &kp B
+#define LBL &kp Q
+#define LBR &kp V
+#define RTR &kp J
+#define RBL &kp K
+#define RBR &kp SLASH
 #endif

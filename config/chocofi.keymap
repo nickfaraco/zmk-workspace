@@ -2,7 +2,7 @@
 #define WIRELESS 1
 
 /* define layout */
-#define ALPHA_13332 1
+#define ALPHA_13332 0  // Use the full matrix
 #define MOUSE_KEYS 1
 
 /* source the main keymap */

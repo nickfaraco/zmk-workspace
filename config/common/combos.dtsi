@@ -36,7 +36,7 @@ ZMK_COMBO(del,          &kp DEL,                RT1 RT3,      BASE BASE_WIN NAV 
 ZMK_COMBO(del_word,     &kp LA(BSPC),           RT1 RT2 RT3,  BASE,                             MS_SLOW)
 ZMK_COMBO(del_word_win, &kp LC(BSPC),           RT1 RT2 RT3,  BASE_WIN,                         MS_SLOW)
 ZMK_COMBO(del_line,     &del_line,              RT1 RT2 RT3,  NAV NAVW,                         MS_SLOW)
-ZMK_COMBO(quote,        &single_to_doublequote, RT2 RT3,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(quote,        &mm_quote,              RT2 RT3,      BASE BASE_WIN,                    MS_SLOW)
 // middle row
 ZMK_COMBO(tilde,        &kp TILDE,              RM0 RM1,      BASE BASE_WIN,                    MS_SLOW)
 ZMK_COMBO(lpar,         &lpar_to_lessthan,      RM1 RM2,      BASE BASE_WIN NUM NUMF,           MS_FAST)
