@@ -76,6 +76,7 @@ ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,    
 
 /* Gaming Layer */
 ZMK_COMBO(game,         &tog GAME,              LM4 LM0,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(base,         &tog BASE_WIN,          LM4 LM0,      GAME,                             MS_SLOW)
 ZMK_COMBO(g_n1,         &kp N1,                 LM1 LM2,      GAME,                             MS_FAST)
 ZMK_COMBO(g_n2,         &kp N2,                 LM2 LM3,      GAME,                             MS_FAST)
 ZMK_COMBO(g_n3,         &kp N3,                 LM1 LM2 LM3,  GAME,                             MS_FAST)
