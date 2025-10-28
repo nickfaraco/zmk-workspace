@@ -15,19 +15,22 @@
     };
 
 
-ZMK_MACRO(macro_egra, bindings = <&kp RA(GRAVE) &kp E>;)
-ZMK_MACRO(macro_eacu, bindings = <&kp RA(E) &kp E>;)
-ZMK_MACRO(macro_agra, bindings = <&kp RA(GRAVE) &kp A>;)
-ZMK_MACRO(macro_igra, bindings = <&kp RA(GRAVE) &kp I>;)
-ZMK_MACRO(macro_ogra, bindings = <&kp RA(GRAVE) &kp O>;)
-ZMK_MACRO(macro_ugra, bindings = <&kp RA(GRAVE) &kp U>;)
+#define AGRA &uc 0xE0 0xC0 // à À
+#define EACU &uc 0xE9 0xC9 // é É
+#define EGRA &uc 0xE8 0xC8 // è È
+#define IGRA &uc 0xEC 0xCC // ì Ì
+#define OGRA &uc 0xF2 0xD2 // ò Ò
+#define UGRA &uc 0xF9 0xD9 // ù Ù
+#define DEGS &uc 0xB0 0    // ù Ù
 
-ZMK_LEADER_SEQUENCE(egra, &macro_egra, E)
-ZMK_LEADER_SEQUENCE(eacu, &macro_eacu, N)
-ZMK_LEADER_SEQUENCE(agra, &macro_agra, A)
-ZMK_LEADER_SEQUENCE(igra, &macro_igra, I)
-ZMK_LEADER_SEQUENCE(ogra, &macro_ogra, O)
-ZMK_LEADER_SEQUENCE(ugra, &macro_ugra, U)
+ZMK_LEADER_SEQUENCE(agra, AGRA, A)
+ZMK_LEADER_SEQUENCE(egra, EGRA, E)
+ZMK_LEADER_SEQUENCE(eacu, EACU, N)
+ZMK_LEADER_SEQUENCE(igra, IGRA, I)
+ZMK_LEADER_SEQUENCE(ogra, OGRA, O)
+ZMK_LEADER_SEQUENCE(ugra, UGRA, U)
 
-ZMK_LEADER_SEQUENCE(deg_mac, &kp RA(LS(N8)), D M)
-ZMK_LEADER_SEQUENCE(deg_win, &macro_deg_win, D W)
+ZMK_LEADER_SEQUENCE(degs, DEGS, D E G)
+
+ZMK_LEADER_SEQUENCE(reset,      &sys_reset,     R E S E T)
+ZMK_LEADER_SEQUENCE(boot,       &bootloader,    B O O T)
