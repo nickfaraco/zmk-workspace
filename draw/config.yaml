@@ -3,8 +3,8 @@ parse_config:
     - "modules/zmk/helpers/include"
 
   zmk_preamble: |
-    #include <zmk-helpers/key-labels/34.h>
-    #define CONFIG_WIRELESS
+    #define WIRELESS 1
+    #define MOUSE_KEYS 1
 
   raw_binding_map:
     "&sys_reset": Reset
@@ -175,7 +175,7 @@ parse_config:
 draw_config:
   append_colon_to_layer_header: false
   dark_mode: false
-  footer_text: "urob/zmk-config"
+  footer_text: "nickfaraco/zmk-workspace"
   glyph_tap_size: 15
   glyph_hold_size: 12
   glyph_shifted_size: 10

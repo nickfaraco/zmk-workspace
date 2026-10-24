@@ -85,33 +85,33 @@ flash expr: (build expr)
 draw: _check_yq_version
     #!/usr/bin/env bash
     set -euo pipefail
-    keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/base.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
+    keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/dummy.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
     yq -Yi '.combos.[].l = ["Combos"]' "{{ draw }}/base.yaml"
-    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/base.yaml" -k "ferris/sweep" >"{{ draw }}/base.svg"
+    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/base.yaml" --ortho-layout '{split: true, rows: 3, columns: 5, thumbs: 3}' >"{{ draw }}/base.svg"
 
     jq_expr='
         def extract_label: if type == "string" then . else .t end;
         def is_transparent: type == "object" and (.type == "trans" or .type == "held");
         .layers = {
         Base: [
-            [.layers.Base, .layers.Nav, .layers.Fn, .layers.Num, .layers.Sys] | transpose[] |
+            [.layers.Base, .layers.Nav, .layers.NumF, .layers.Mouse, .layers.Adj] | transpose[] |
             (.[0] | if type == "string" then {t: .} else . end) as $base |
             (.[1] | if is_transparent then null else extract_label end) as $nav |
-            (.[2] | if is_transparent then null else extract_label end) as $fn |
-            (.[3] | if is_transparent then null else extract_label end) as $num |
-            (.[4] | if is_transparent then null else extract_label end) as $sys |
+            (.[2] | if is_transparent then null else extract_label end) as $numf |
+            (.[3] | if is_transparent then null else extract_label end) as $mouse |
+            (.[4] | if is_transparent then null else extract_label end) as $adj |
             $base
             + (if $nav == null then {} else {tr: $nav} end)
-            + (if $fn == null then {} else {tl: $fn} end)
-            + (if $num == null then {} else {bl: $num} end)
-            + (if $sys == null then {} else {br: $sys} end)
+            + (if $numf == null then {} else {tl: $numf} end)
+            + (if $mouse == null then {} else {bl: $mouse} end)
+            + (if $adj == null then {} else {br: $adj} end)
         ],
         Combos: .layers.Combos
         } |
         .combos = [.combos[] | .l = ["Combos"]]
     '
     yq -y "$jq_expr" "{{ draw }}/base.yaml" >"{{ draw }}/overview.yaml"
-    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/overview.yaml" -k "ferris/sweep" >"{{ draw }}/overview.svg"
+    keymap -c "{{ draw }}/config.yaml" draw "{{ draw }}/overview.yaml" --ortho-layout '{split: true, rows: 3, columns: 5, thumbs: 3}' >"{{ draw }}/overview.svg"
     sed -i '/<text.*class="label"/d' "{{ draw }}/overview.svg"
 
 # initialize the west workspace
