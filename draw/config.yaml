@@ -10,36 +10,35 @@ parse_config:
     "&sys_reset": Reset
     "&bootloader": Boot
     "&caps_word": Caps Word
-    "&kp LA(F4)": Close
+    "&soft_off": "Off"
+    "&to_linux": Linux
+    "&to_pc": PC
+    "&to_osx": macOS
+    "&macro_qu": Qu
+    "&del_line": Del Line
+    "&macro_chat": Chat
+    "&curr": { "t": "$", "s": "€" }
 
     "&bt BT_SEL 0": BT 1
     "&bt BT_SEL 1": BT 2
     "&bt BT_SEL 2": BT 3
     "&bt BT_SEL 3": BT 4
 
-    "&kp LC(INS)": Copy
-    "&kp LC(X)": Cut
-    "&kp LS(INS)": Paste
-
-    "&kp LG(LC(LEFT))": PDesk
-    "&kp LG(LC(RIGHT))": NDesk
-    "&kp LG(LC(LS(A)))": PinA.
-    "&kp LG(LC(LS(Q)))": PinW.
+    "&quit": Quit ×2
+    "&quit_win": Close ×2
+    "&lockscr": Lock ×2
+    "&lockscr_win": Lock ×2
+    "&bt_clr": BT Clr ×2
+    "&screenshot": Shot
+    "&key_repeat": Repeat
 
     "&swapper": NWin
+    "&swapper_win": NWin
     "&kp LS(TAB)": PWin
     "&dot_spc": Sentence
     "&num_dance": { "t": "Smart"}
-    "&magic_shift": { "t": Magic, "h": "Shift" }
-    "&smart_mouse": Smart Mouse
-
-    "&hml LS(LALT)TAB": Tab
-    "&hm_combo_ldr": Leader
-    "&hm_combo_ldrsh": Shift+Leader
-    "&hm_combo_lpar": { "t": "< (" }
-    "&hm_combo_rpar": { "t": "> )"}
-    "&kp LBKT": { "t": "{ ["}
-    "&kp RBKT": { "t": "} ]"}
+    "&leader": Leader
+    "&leader_sft": Shift+Leader
 
     "&mmv MOVE_UP": Mouse ↑
     "&mmv MOVE_DOWN": Mouse ↓
@@ -51,22 +50,13 @@ parse_config:
     "&msc SCRL_LEFT": Scroll ←
     "&msc SCRL_RIGHT": Scroll →
 
-    "&mkp LCLK": Left Click
-    "&mkp RCLK": Right Click
-    "&mkp MCLK": Middle Click
+    "&mkp MB1": Left Click
+    "&mkp MB2": Right Click
+    "&mkp MB3": Middle Click
     "&mkp MB4": Back Click
     "&mkp MB5": Forward Click
 
   trans_legend: { "t": "", "type": "trans" }
-
-  zmk_combos:
-    combo_cut: { align: bottom, o: 0.15 }
-    combo_ldrsh: { align: top, o: 1.35 }
-
-    combo_lt: { hidden: true }
-    combo_gt: { hidden: true }
-    combo_lbrc: { hidden: true }
-    combo_rbrc: { hidden: true }
 
   zmk_keycode_map:
     # custom mappings
@@ -78,6 +68,8 @@ parse_config:
     RGUI: Gui
     LSHFT: Shift
     RSHFT: Shift
+    LSHIFT: Shift
+    RSHIFT: Shift
 
     BSPC: Bspc
     DEL: Del

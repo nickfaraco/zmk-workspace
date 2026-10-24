@@ -1,31 +1,23 @@
 /*
-    to select which keys configuration the keyboard uses
-        #define ALPHA_13332 1
-            or
-        #define ALPHA_23332 1
-    If none of the above is added, a full 3x5 matrix is defined for each half
-    of the split keyboard
+    Bindings of the keys that exist on some boards only, selected by
+        #define ALPHA_23332 1    top outer corners (LT4, RT4) active
+    or
+        #define ALPHA_13332 1    (default) none of them active
+    The numbers count the keys per column, from the outer to the inner one.
+    Everything bound here must also be reachable through a combo, so that the
+    28-key layout stays complete.
 */
 
-#if ALPHA_13332
+#if ALPHA_23332
+#define LTL &kp V
+#define RTR &single_to_doublequote
+#else
 #define LTL &none
+#define RTR &none
+#endif
+
+// bottom outer and bottom inner keys: unused on every board
 #define LBL &none
 #define LBR &none
-#define RTR &none
 #define RBL &none
 #define RBR &none
-#elif ALPHA_23332
-#define LTL &kp ESC
-#define LBL &kp V
-#define LBR &none
-#define RTR &kp RET
-#define RBL &none
-#define RBR &single_to_doublequote
-#else // full 3x5 matrix
-#define LTL &key_repeat
-#define LBL &kp V
-#define LBR &kp Q
-#define RTR &kp K_CANCEL
-#define RBL &kp Z
-#define RBR &single_to_doublequote
-#endif
