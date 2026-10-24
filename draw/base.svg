@@ -1202,6 +1202,7 @@ text.br, use.br { fill: var(--color-sys); }
 </g>
 <g transform="translate(210, 196)" class="key keypos-31">
 <rect rx="6" ry="6" x="-28" y="-26" width="56" height="52" class="key"/>
+<text x="0" y="1" class="key tap"><tspan style="font-size: 78%">&amp;soft_off</tspan></text>
 </g>
 <g transform="translate(270, 196)" class="key keypos-32">
 <rect rx="6" ry="6" x="-28" y="-26" width="56" height="52" class="key"/>
