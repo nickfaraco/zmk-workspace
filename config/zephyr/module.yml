@@ -1,0 +1,7 @@
+# Expose the repo root as a Zephyr module so ZMK finds the custom shields in
+# boards/shields. (A zephyr/module.yml at the root would clash with the
+# west-managed Zephyr checkout.)
+name: zmk-workspace-shields
+build:
+  settings:
+    board_root: ..

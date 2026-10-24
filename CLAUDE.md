@@ -30,9 +30,9 @@ just format <files|dir>   # dts-format (near no-op on ZMK_LAYER grids)
 just clean
 ```
 
-Validate keymap changes by building. `just test` is a snapshot harness for developing the ZMK *modules*, not this keymap. Build warnings that come from ZMK/Zephyr itself and can be ignored: `Deprecated symbol KSCAN`, the `behavior_tap_dance.c` const warning, `ZMK_USB` on the peripheral half, the RP2040 dtc `memory@20000000` and `SETTINGS_NVS` notes, and the `config/boards` deprecation (see below).
+Validate keymap changes by building. `just test` is a snapshot harness for developing the ZMK *modules*, not this keymap. Build warnings that come from ZMK/Zephyr itself and can be ignored: `Deprecated symbol KSCAN`, the `behavior_tap_dance.c` const warning, `ZMK_USB` on the peripheral half, the RP2040 dtc `memory@20000000` and `SETTINGS_NVS` notes.
 
-CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**` or `build.yaml`. `bump-west.yml` opens weekly pin-bump PRs.
+CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**`, `boards/**` or `build.yaml`. `bump-west.yml` opens weekly pin-bump PRs.
 
 ## Keymap architecture
 
@@ -51,7 +51,7 @@ Layers: indices are `#define`d at the top of `base.keymap` (`BASE`, `BASE_WIN`, 
 
 Homerow mods (`hml`/`hmr`) use urob's "timeless" HRM settings (large tapping-term, `require-prior-idle-ms`, positional hold-tap on the opposite hand + thumbs). Read the README's HRM section before tuning them.
 
-Board-level Kconfig goes in `config/<board>.conf`. The custom shields (neither ships with ZMK) live in `config/boards/shields/`. ZMK has deprecated that location in favor of a module, but it still works. It can't simply move to the repo root, because the root's `zephyr/` directory is the west-managed Zephyr checkout.
+Board-level Kconfig goes in `config/<board>.conf`. The custom shields (neither ships with ZMK) live in `boards/shields/` at the repo root. They're exposed as a Zephyr module through `config/zephyr/module.yml` (`board_root: ..`). Zephyr scans every west project for modules, including the manifest project `config/`. The module file can't sit at the repo root, because the root's `zephyr/` directory is the west-managed Zephyr checkout. Don't reintroduce `config/boards/`, which ZMK has deprecated.
 
 ## Upgrading ZMK
 

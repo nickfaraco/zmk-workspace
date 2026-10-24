@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - config/**
+      - boards/**
       - build.yaml
   pull_request:
     paths:
       - config/**
+      - boards/**
       - build.yaml
 
 permissions:
