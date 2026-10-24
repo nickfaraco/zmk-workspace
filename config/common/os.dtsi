@@ -4,6 +4,12 @@
  * Linux/Windows differences. Which one is active is stored per endpoint (USB
  * and each BT profile) by the default-layer module and survives reboots.
  *
+ * &df stores the choice for the endpoint that is active *when it runs*. A BT
+ * profile only becomes the active endpoint once it is connected (before that
+ * ZMK falls back to USB or NONE), so the to_* keys must be pressed while
+ * connected to the host. Saves are debounced by 60s
+ * (CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE) before they reach flash.
+ *
  * Unicode input follows the layer through a layer listener: entering BASE_WIN
  * selects Linux input, leaving it selects macOS input. Windows (WinCompose) is
  * an explicit, non-persistent override via &to_pc.
@@ -50,18 +56,3 @@ ZMK_MACRO(to_pc,
         , <&uc UC_SET_WIN_COMPOSE>
         ;
 )
-
-#if WIRELESS
-// Dedicated BT profiles: 0 = Mac, 1 = PC. Selecting a profile restores its
-// stored layer; setting it again here keeps the mapping in place.
-ZMK_MACRO(osx_connect,
-    wait-ms = <100>;
-    tap-ms = <5>;
-    bindings = <&bt BT_SEL 0 &df DF_SEL BASE>;
-)
-ZMK_MACRO(pc_connect,
-    wait-ms = <100>;
-    tap-ms = <5>;
-    bindings = <&bt BT_SEL 1 &df DF_SEL BASE_WIN>;
-)
-#endif

@@ -195,7 +195,7 @@ text.br, use.br { fill: var(--color-sys); }
 <text x="0" y="22" class="key hold">LSHIFT</text>
 <text x="-24" y="-22" class="key tl">F2</text>
 <text x="24" y="-22" class="key tr">Gui+C</text>
-<text x="24" y="22" class="key br"><tspan style="font-size: 64%">&amp;pc_connect</tspan></text>
+<text x="24" y="22" class="key br">BT 2</text>
 </g>
 <g transform="translate(210, 84)" class="key keypos-13">
 <rect rx="6" ry="6" x="-28" y="-26" width="56" height="52" class="key"/>
@@ -203,7 +203,7 @@ text.br, use.br { fill: var(--color-sys); }
 <text x="0" y="22" class="key hold">Gui</text>
 <text x="-24" y="-22" class="key tl">F1</text>
 <text x="24" y="-22" class="key tr">Gui+V</text>
-<text x="24" y="22" class="key br"><tspan style="font-size: 64%">&amp;osx_conne…</tspan></text>
+<text x="24" y="22" class="key br">BT 1</text>
 </g>
 <g transform="translate(270, 84)" class="key keypos-14">
 <rect rx="6" ry="6" x="-28" y="-26" width="56" height="52" class="key"/>
