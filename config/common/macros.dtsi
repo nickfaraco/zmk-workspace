@@ -19,7 +19,7 @@ ZMK_MACRO(macro_qu,
 )
 
 ZMK_MACRO(macro_chat,
-    bindings = <&to BASE_WIN &kp SLASH>;
+    bindings = <&tog GAME &kp SLASH>;
 )
 
 

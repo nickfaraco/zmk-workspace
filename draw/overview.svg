@@ -660,7 +660,7 @@ text.br, use.br { fill: var(--color-sys); }
 <path d="M150,84 l-100,0" class="combo"/>
 <path d="M150,84 l100,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="71" width="28" height="26" class="combo"/>
-<text x="150" y="84" class="combo tap">Base_W</text>
+<text x="150" y="84" class="combo tap">Game</text>
 <text x="150" y="93" class="combo hold">toggle</text>
 </g>
 <g class="combo combopos-40">
