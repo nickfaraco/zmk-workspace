@@ -12,8 +12,8 @@
 #     shield: reviung41
 #
 ---
-board: ["nice_nano_v2"]
+board: ["nice_nano//zmk"]
 shield: ["chocofi_left", "chocofi_right"]
 include:
-  - board: seeeduino_xiao_rp2040
+  - board: xiao_rp2040//zmk
     shield: zilpzalp
