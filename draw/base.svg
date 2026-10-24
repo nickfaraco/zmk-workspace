@@ -1644,33 +1644,28 @@ text.br, use.br { fill: var(--color-sys); }
 <g class="combo combopos-33">
 <rect rx="6" ry="6" x="526" y="43" width="28" height="26" class="combo"/>
 <text x="540" y="56" class="combo tap">$</text>
-<text x="540" y="47" class="combo shifted">Alt+5</text>
+<text x="540" y="47" class="combo shifted"><tspan style="font-size: 64%">&amp;uc 0x20AC…</tspan></text>
 </g>
 <g class="combo combopos-34">
-<rect rx="6" ry="6" x="526" y="43" width="28" height="26" class="combo"/>
-<text x="540" y="56" class="combo tap">$</text>
-<text x="540" y="47" class="combo shifted"><tspan style="font-size: 64%">&amp;macro_eur…</tspan></text>
-</g>
-<g class="combo combopos-35">
 <rect rx="6" ry="6" x="406" y="99" width="28" height="26" class="combo"/>
 <text x="420" y="112" class="combo tap">-</text>
 </g>
-<g class="combo combopos-36">
+<g class="combo combopos-35">
 <rect rx="6" ry="6" x="466" y="99" width="28" height="26" class="combo"/>
 <text x="480" y="112" class="combo tap">/</text>
 </g>
-<g class="combo combopos-37">
+<g class="combo combopos-36">
 <rect rx="6" ry="6" x="526" y="99" width="28" height="26" class="combo"/>
 <text x="540" y="112" class="combo tap">=</text>
 </g>
-<g class="combo combopos-38">
+<g class="combo combopos-37">
 <path d="M150,140 l-102,-48" class="combo"/>
 <path d="M150,140 l102,48" class="combo"/>
 <rect rx="6" ry="6" x="136" y="127" width="28" height="26" class="combo"/>
 <a href="#Mouse">
 <text x="150" y="140" class="combo tap layer-activator">Mouse</text>
 </a></g>
-<g class="combo combopos-39">
+<g class="combo combopos-38">
 <path d="M150,84 l-100,0" class="combo"/>
 <path d="M150,84 l100,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="71" width="28" height="26" class="combo"/>
@@ -1678,7 +1673,7 @@ text.br, use.br { fill: var(--color-sys); }
 <text x="150" y="84" class="combo tap layer-activator">Game</text>
 </a><text x="150" y="93" class="combo hold">toggle</text>
 </g>
-<g class="combo combopos-40">
+<g class="combo combopos-39">
 <path d="M150,84 l-100,0" class="combo"/>
 <path d="M150,84 l100,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="71" width="28" height="26" class="combo"/>
@@ -1686,53 +1681,53 @@ text.br, use.br { fill: var(--color-sys); }
 <text x="150" y="84" class="combo tap layer-activator">Base_W</text>
 </a><text x="150" y="93" class="combo hold">toggle</text>
 </g>
-<g class="combo combopos-41">
+<g class="combo combopos-40">
 <rect rx="6" ry="6" x="166" y="71" width="28" height="26" class="combo"/>
 <text x="180" y="84" class="combo tap">1</text>
 </g>
-<g class="combo combopos-42">
+<g class="combo combopos-41">
 <rect rx="6" ry="6" x="106" y="71" width="28" height="26" class="combo"/>
 <text x="120" y="84" class="combo tap">2</text>
 </g>
-<g class="combo combopos-43">
+<g class="combo combopos-42">
 <path d="M150,84 l40,0" class="combo"/>
 <path d="M150,84 l-40,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="71" width="28" height="26" class="combo"/>
 <text x="150" y="84" class="combo tap">3</text>
 </g>
-<g class="combo combopos-44">
+<g class="combo combopos-43">
 <rect rx="6" ry="6" x="166" y="127" width="28" height="26" class="combo"/>
 <text x="180" y="140" class="combo tap">4</text>
 </g>
-<g class="combo combopos-45">
+<g class="combo combopos-44">
 <rect rx="6" ry="6" x="106" y="127" width="28" height="26" class="combo"/>
 <text x="120" y="140" class="combo tap">5</text>
 </g>
-<g class="combo combopos-46">
+<g class="combo combopos-45">
 <path d="M150,140 l40,0" class="combo"/>
 <path d="M150,140 l-40,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="127" width="28" height="26" class="combo"/>
 <text x="150" y="140" class="combo tap">6</text>
 </g>
-<g class="combo combopos-47">
+<g class="combo combopos-46">
 <rect rx="6" ry="6" x="166" y="15" width="28" height="26" class="combo"/>
 <text x="180" y="28" class="combo tap">7</text>
 </g>
-<g class="combo combopos-48">
+<g class="combo combopos-47">
 <rect rx="6" ry="6" x="106" y="15" width="28" height="26" class="combo"/>
 <text x="120" y="28" class="combo tap">8</text>
 </g>
-<g class="combo combopos-49">
+<g class="combo combopos-48">
 <path d="M150,28 l40,0" class="combo"/>
 <path d="M150,28 l-40,0" class="combo"/>
 <rect rx="6" ry="6" x="136" y="15" width="28" height="26" class="combo"/>
 <text x="150" y="28" class="combo tap">9</text>
 </g>
-<g class="combo combopos-50">
+<g class="combo combopos-49">
 <rect rx="6" ry="6" x="436" y="71" width="28" height="26" class="combo"/>
 <text x="450" y="84" class="combo tap"><tspan style="font-size: 64%">&amp;macro_chat</tspan></text>
 </g>
-<g class="combo combopos-51">
+<g class="combo combopos-50">
 <rect rx="6" ry="6" x="496" y="71" width="28" height="26" class="combo"/>
 <text x="510" y="84" class="combo tap">ESCAPE</text>
 </g>

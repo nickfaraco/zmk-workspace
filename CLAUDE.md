@@ -11,7 +11,7 @@ Targets (see `build.yaml`):
 - **chocofi**: split, `nice_nano//zmk` (nice!nano v2), wireless
 - **zilpzalp**: unibody, `xiao_rp2040//zmk`, wired, 28 physical keys
 
-ZMK tracks a pinned commit of `main` (Zephyr 4.1, HWMv2 board names, `name@rev//zmk` syntax), not a release tag. `config/west.yml` is maintained by `pin-west`: never hand-edit revisions. Use `just bump-west` instead, and run `pin-west pin` after adding or removing a module. Custom behaviors come from urob's modules (helpers, auto-layer, adaptive-key, leader-key, tri-state, unicode), checked out under `modules/zmk/`.
+ZMK tracks a pinned commit of `main` (Zephyr 4.1, HWMv2 board names, `name@rev//zmk` syntax), not a release tag. `config/west.yml` is maintained by `pin-west`: never hand-edit revisions. Use `just bump-west` instead, and run `pin-west pin` after adding or removing a module. Custom behaviors come from urob's modules (helpers, auto-layer, adaptive-key, leader-key, tri-state, unicode) plus `cormoran/zmk-feature-default-layer` and `ssbb/zmk-listeners`, all checked out under `modules/zmk/`.
 
 ## Commands
 
@@ -30,7 +30,7 @@ just format <files|dir>   # dts-format (near no-op on ZMK_LAYER grids)
 just clean
 ```
 
-Validate keymap changes by building. `just test` is a snapshot harness for developing the ZMK *modules*, not this keymap. Build warnings that come from ZMK/Zephyr itself and can be ignored: `Deprecated symbol KSCAN`, the `behavior_tap_dance.c` const warning, `ZMK_USB` on the peripheral half, the RP2040 dtc `memory@20000000` and `SETTINGS_NVS` notes.
+Validate keymap changes by building. `just test` is a snapshot harness for developing the ZMK *modules*, not this keymap. Build warnings that come from ZMK/Zephyr itself and can be ignored: `Deprecated symbol KSCAN`, the `behavior_tap_dance.c` const warning, `ZMK_USB` on the peripheral half, and the RP2040 dtc `memory@20000000` note.
 
 CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**`, `boards/**` or `build.yaml`. `bump-west.yml` opens weekly pin-bump PRs.
 
@@ -38,16 +38,18 @@ CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**`,
 
 All boards share a single keymap: **`config/base.keymap`**. Each per-board keymap (`chocofi.keymap`, `zilpzalp.keymap`, `dummy.keymap`) only sets feature `#define`s and then `#include "base.keymap"`:
 
-- `WIRELESS` (1/0): enables the BT/output bindings (`BTL1`/`BTL2` on the Adj layer) and BT macros in `macros.dtsi`
+- `WIRELESS` (1/0): enables the BT/output bindings (`BTL1`/`BTL2` on the Adj layer) and the BT connect macros in `common/os.dtsi`
 - `MOUSE_KEYS`: includes `common/mouse.dtsi` and the Mouse layer (the board's `.conf` also needs `CONFIG_ZMK_POINTING=y`)
 - `ALPHA_13332` / `ALPHA_23332` / neither: selects how the outer "extra" keys (`LTL`, `LBL`, `LBR`, `RTR`, `RBL`, `RBR`) are bound, in `common/extra_keys.h`. `ALPHA_13332` sets them to `&none`, which leaves 28 active keys. Both current boards use it, and the letters they would carry (V, Q, Z…) are reached through combos.
 - `DUMMY_KEEB`: used by `dummy.keymap`, which `just draw` parses, to show every key
 
 The keymap is always written as a full **36-key 3x5+3 grid** using `zmk-helpers` key labels (`LT0…RH2`, from `zmk-helpers/key-labels/36.h`, which also provides `KEYS_L`/`KEYS_R`/`THUMBS`). Boards with fewer keys map their physical matrix onto that grid in their shield overlay. For example, `boards/shields/zilpzalp/zilpzalp.overlay` defines `square_transform`, which places nonexistent keys on unused row 9. When you change bindings, keep every layer at 36 positions, and refer to keys in combos/HRMs by label, never by numeric index.
 
-Layers: indices are `#define`d at the top of `base.keymap` (`BASE`, `BASE_WIN`, `NUM`, `NUMF`, `NAV`, `NAVW`, `GAME`, `ADJ`, `MSE`) and used in bindings/combos. The `ZMK_LAYER(...)` blocks must appear in the same order, under *mixed-case* names (`Base`, `Num`, `Nav`, …). An all-caps name like `NUM` would be macro-expanded to its index, and the display name would become a number. `just draw`'s overview recipe in the `Justfile` refers to the layers by these names. `Base_W`/`Nav_W` are macOS→Windows overlays that swap GUI/CTRL on homerow mods and shortcuts, and `Nav_W` is a conditional layer (`BASE_WIN` + `NAV`). Macros and shortcut `#define`s assume macOS by default (e.g. `undo = LG(Z)`).
+Layers: indices are `#define`d at the top of `base.keymap` (`BASE`, `BASE_WIN`, `NUM`, `NUMF`, `NAV`, `NAVW`, `GAME`, `ADJ`, `MSE`) and used in bindings/combos. The `ZMK_LAYER(...)` blocks must appear in the same order, under *mixed-case* names (`Base`, `Num`, `Nav`, …). An all-caps name like `NUM` would be macro-expanded to its index, and the display name would become a number. `just draw`'s overview recipe in the `Justfile` refers to the layers by these names. `Base_W`/`Nav_W` are macOS→Linux/Windows overlays that swap GUI/CTRL on homerow mods and shortcuts, and `Nav_W` is a conditional layer (`BASE_WIN` + `NAV`). Bindings assume macOS by default; put PC variants in the overlays (or per-layer combos), never in a separate copy of a layer.
 
-`config/common/` holds the shared pieces included by `base.keymap`: `combos.dtsi` (each combo lists the layers it is active on, and uses one of the `COMBO_TERM_*`/`COMBO_IDLE_*` timing tiers defined at its top; horizontal combos need 150 ms of prior idle so rolls inside words never trigger them), `macros.dtsi`, `leader.dtsi` (leader sequences + unicode), `mouse.dtsi` (`ZMK_POINTING_DEFAULT_*` speeds, `&mmv`/`&msc` tuning), `extra_keys.h`.
+OS handling lives in `common/os.dtsi`. The OS is chosen by activating `BASE_WIN` (or not), and that choice is stored per endpoint (USB and each BT profile) by the default-layer module (`&df DF_SEL <layer>`, `CONFIG_ZMK_DEFAULT_LAYER_*` in the `.conf` files). Wired boards need `CONFIG_SETTINGS=y` for it to persist. A layer listener sets the Unicode input mode whenever `BASE_WIN` turns on (Linux) or off (macOS), so there is a single `&uc` and a single leader. Windows (WinCompose) is a manual override via `&to_pc` and isn't saved. Don't use `&to BASE`/`&to BASE_WIN` for OS switching, since that bypasses the stored choice. ZMK macros queue all their steps on press, so anything that must run after the listener goes after `&macro_pause_for_release`.
+
+`config/common/` holds the shared pieces included by `base.keymap`: `combos.dtsi` (each combo lists the layers it is active on, and uses one of the `COMBO_TERM_*`/`COMBO_IDLE_*` timing tiers defined at its top; horizontal combos need 150 ms of prior idle so rolls inside words never trigger them), `os.dtsi`, `macros.dtsi`, `leader.dtsi` (leader sequences + unicode), `mouse.dtsi` (`ZMK_POINTING_DEFAULT_*` speeds, `&mmv`/`&msc` tuning), `extra_keys.h`.
 
 Homerow mods (`hml`/`hmr`) use urob's "timeless" HRM settings (large tapping-term, `require-prior-idle-ms`, positional hold-tap on the opposite hand + thumbs). Read the README's HRM section before tuning them.
 

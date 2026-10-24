@@ -27,6 +27,10 @@ manifest:
       url-base: https://github.com/urob
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: cormoran
+      url-base: https://github.com/cormoran
+    - name: ssbb
+      url-base: https://github.com/ssbb
 
   projects:
     - name: zmk
@@ -53,6 +57,14 @@ manifest:
     - name: zmk-unicode
       path: modules/zmk/unicode
       revision: 6ce21267e497e20ff9e05da16d4eefcdd3e89190 # main (2026-10-19)
+    - name: zmk-feature-default-layer
+      remote: cormoran
+      path: modules/zmk/default-layer
+      revision: 92728246f80d327709839b2dbf5cf11880ff87e1 # main (2026-10-24)
+    - name: zmk-listeners
+      remote: ssbb
+      path: modules/zmk/listeners
+      revision: 7f9c5c33418589bb563150855c5de282bb3e1f5b # main (2026-10-24)
 
     # Avoid downloading GBs of unused Zephyr modules. Remove this section to
     # restore the default (needed for less common hardware).

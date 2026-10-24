@@ -26,6 +26,7 @@
 #define ___ &trans
 
 
+#include "common/os.dtsi"
 #include "common/macros.dtsi"
 #include "common/combos.dtsi"
 #include "common/leader.dtsi"
@@ -131,13 +132,9 @@ ZMK_HOLD_TAP( lt_spc,
     bindings = <&mo>, <&spc_morph>;
 )
 
-// Currency
-ZMK_MOD_MORPH(curr_mac,
-    bindings = <&kp DLLR>, <&kp LA(N5)>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_MOD_MORPH(curr_win,
-    bindings = <&kp DLLR>, <&macro_euro_win>;
+// Currency: tap: $ | shift + tap: € (unicode, follows the OS layer)
+ZMK_MOD_MORPH(curr,
+    bindings = <&kp DLLR>, <&uc 0x20AC 0x20AC>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
