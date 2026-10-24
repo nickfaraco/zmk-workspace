@@ -47,27 +47,7 @@
 #define QUICK_TAP_MS 125
 
 // macros definition
-#define meh LG(LC(LALT))
 #define hyper LG(LC(LS(LALT)))
-#define deg RA(LS(N8))
-#define HR_APP LG(LS(SPACE))
-#define DSK_PREV_W LG(LC(LEFT))
-#define DSK_NEXT_W LG(LC(RIGHT))
-
-// OSX specific macros
-#define undo LG(Z)
-#define redo LG(LS(Z))
-#define DSK_PREV LC(LEFT)
-#define DSK_NEXT LC(RIGHT)
-#define prev_win LG(TAB)
-#define next_win LG(LS(TAB))
-
-
-// tune mod tap
-&mt {
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-};
 
 // layer tap config
 &lt {

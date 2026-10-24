@@ -21,7 +21,7 @@
 #define IGRA &uc 0xEC 0xCC // ì Ì
 #define OGRA &uc 0xF2 0xD2 // ò Ò
 #define UGRA &uc 0xF9 0xD9 // ù Ù
-#define DEGS &uc 0xB0 0    // ù Ù
+#define DEGS &uc 0xB0 0    // °
 
 ZMK_LEADER_SEQUENCE(agra, AGRA, A)
 ZMK_LEADER_SEQUENCE(egra, EGRA, E)

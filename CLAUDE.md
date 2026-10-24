@@ -47,7 +47,7 @@ The keymap is always written as a full **36-key 3x5+3 grid** using `zmk-helpers`
 
 Layers: indices are `#define`d at the top of `base.keymap` (`BASE`, `BASE_WIN`, `NUM`, `NUMF`, `NAV`, `NAVW`, `GAME`, `ADJ`, `MSE`) and used in bindings/combos. The `ZMK_LAYER(...)` blocks must appear in the same order, under *mixed-case* names (`Base`, `Num`, `Nav`, …). An all-caps name like `NUM` would be macro-expanded to its index, and the display name would become a number. `just draw`'s overview recipe in the `Justfile` refers to the layers by these names. `Base_W`/`Nav_W` are macOS→Windows overlays that swap GUI/CTRL on homerow mods and shortcuts, and `Nav_W` is a conditional layer (`BASE_WIN` + `NAV`). Macros and shortcut `#define`s assume macOS by default (e.g. `undo = LG(Z)`).
 
-`config/common/` holds the shared pieces included by `base.keymap`: `combos.dtsi` (each combo lists the layers it is active on), `macros.dtsi`, `leader.dtsi` (leader sequences + unicode), `mouse.dtsi` (`ZMK_POINTING_DEFAULT_*` speeds, `&mmv`/`&msc` tuning), `extra_keys.h`.
+`config/common/` holds the shared pieces included by `base.keymap`: `combos.dtsi` (each combo lists the layers it is active on, and uses one of the `COMBO_TERM_*`/`COMBO_IDLE_*` timing tiers defined at its top; horizontal combos need 150 ms of prior idle so rolls inside words never trigger them), `macros.dtsi`, `leader.dtsi` (leader sequences + unicode), `mouse.dtsi` (`ZMK_POINTING_DEFAULT_*` speeds, `&mmv`/`&msc` tuning), `extra_keys.h`.
 
 Homerow mods (`hml`/`hmr`) use urob's "timeless" HRM settings (large tapping-term, `require-prior-idle-ms`, positional hold-tap on the opposite hand + thumbs). Read the README's HRM section before tuning them.
 

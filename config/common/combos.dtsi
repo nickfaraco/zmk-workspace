@@ -7,84 +7,88 @@
           ╰────────────┴────────────╯                 ╰─────────────┴─────────────╯
 */
 
-#define MS_FAST 20
-#define MS_SLOW 50
-// use global-quick-tap-ms for combos (requires PR 1387)
-#define COMBO_HOOK global-quick-tap-ms = <50>;
+// Combo timing. TERM is how close together the keys must be pressed; IDLE
+// is how long no other key must have been pressed before (prevents rolls
+// inside words from triggering combos).
+#define COMBO_TERM_FAST 30  // horizontal (adjacent keys in a row)
+#define COMBO_TERM_SLOW 40  // vertical and non-adjacent
+#define COMBO_IDLE_FAST 150
+#define COMBO_IDLE_SLOW 50
+#define COMBO_TERM_GAME 20  // game layer: no idle requirement while moving
 
 // missing letters
-ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 /* left-hand side horizontal combos */
 // middle row
-ZMK_COMBO(quest,        &kp QUESTION,           LM4 LM3,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(tab,          &kp TAB,                LM3 LM2,      BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(leader,       &leader,                LM2 LM1,      BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(leader_sft,   &leader_sft,            LM3 LM2 LM1,  BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(hash,         &kp HASH,               LM1 LM0,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
+ZMK_COMBO(quest,        &kp QUESTION,           LM4 LM3,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(tab,          &kp TAB,                LM3 LM2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(leader,       &leader,                LM2 LM1,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(leader_sft,   &leader_sft,            LM3 LM2 LM1,  BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(hash,         &kp HASH,               LM1 LM0,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
 // bottom row
-ZMK_COMBO(esc,          &esc_kcancel,           LB3 LB2,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
-ZMK_COMBO(ret,          &kp RET,                LB2 LB1,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
+ZMK_COMBO(esc,          &esc_kcancel,           LB3 LB2,      BASE BASE_WIN NAV NAVW NUM NUMF,  COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(ret,          &kp RET,                LB2 LB1,      BASE BASE_WIN NAV NAVW NUM NUMF,  COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 /* right-hand side horizontal combos */
 // top row
-ZMK_COMBO(bspc,         &kp BSPC,               RT1 RT2,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
-ZMK_COMBO(del,          &kp DEL,                RT1 RT3,      BASE BASE_WIN NAV NAVW NUM NUMF,  MS_SLOW)
-ZMK_COMBO(del_word,     &kp LA(BSPC),           RT1 RT2 RT3,  BASE,                             MS_SLOW)
-ZMK_COMBO(del_word_win, &kp LC(BSPC),           RT1 RT2 RT3,  BASE_WIN,                         MS_SLOW)
-ZMK_COMBO(del_line,     &del_line,              RT1 RT2 RT3,  NAV NAVW,                         MS_SLOW)
-ZMK_COMBO(quote,        &single_to_doublequote, RT2 RT3,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(bspc,         &kp BSPC,               RT1 RT2,      BASE BASE_WIN NAV NAVW NUM NUMF,  COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(del,          &kp DEL,                RT1 RT3,      BASE BASE_WIN NAV NAVW NUM NUMF,  COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(del_word,     &kp LA(BSPC),           RT1 RT2 RT3,  BASE,                             COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(del_word_win, &kp LC(BSPC),           RT1 RT2 RT3,  BASE_WIN,                         COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(del_line,     &del_line,              RT1 RT2 RT3,  NAV NAVW,                         COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(quote,        &single_to_doublequote, RT2 RT3,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
 // middle row
-ZMK_COMBO(tilde,        &kp TILDE,              RM0 RM1,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(lpar,         &lpar_to_lessthan,      RM1 RM2,      BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(rpar,         &rpar_to_greaterthan,   RM2 RM3,      BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(excl,         &kp EXCL,               RM3 RM4,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(tilde,        &kp TILDE,              RM0 RM1,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(lpar,         &lpar_to_lessthan,      RM1 RM2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(rpar,         &rpar_to_greaterthan,   RM2 RM3,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(excl,         &kp EXCL,               RM3 RM4,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
 // bottom row
-ZMK_COMBO(lbrk,         &brk_to_brc_left,       RB1 RB2,      BASE BASE_WIN NUM NUMF,           MS_FAST)
-ZMK_COMBO(rbrk,         &brk_to_brc_right,      RB2 RB3,      BASE BASE_WIN NUM NUMF,           MS_FAST)
+ZMK_COMBO(lbrk,         &brk_to_brc_left,       RB1 RB2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(rbrk,         &brk_to_brc_right,      RB2 RB3,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
 
 
 /* left-hand side vertical combos */
 // upper
-ZMK_COMBO(and,          &kp AMPS,               LT3 LM3,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(at,           &kp AT,                 LT2 LM2,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(caret,        &kp CARET,              LT1 LM1,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(perc,         &kp PERCENT,            LT0 LM0,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(and,          &kp AMPS,               LT3 LM3,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(at,           &kp AT,                 LT2 LM2,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(caret,        &kp CARET,              LT1 LM1,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(perc,         &kp PERCENT,            LT0 LM0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 // lower
-ZMK_COMBO(pipe,         &kp PIPE,               LM3 LB3,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(bslh,         &kp BSLH,               LM2 LB2,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(under,        &kp UNDER,              LM1 LB1,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(pipe,         &kp PIPE,               LM3 LB3,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(bslh,         &kp BSLH,               LM2 LB2,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(under,        &kp UNDER,              LM1 LB1,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 /* right-hand side vertical combos */
 // upper
-ZMK_COMBO(grave,        &kp GRAVE,              RT0 RM0,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(plus,         &kp PLUS,               RT1 RM1,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
-ZMK_COMBO(astrk,        &kp ASTRK,              RT2 RM2,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
-ZMK_COMBO(dllr_m,       &curr_mac,              RT3 RM3,      BASE,                             MS_SLOW)
-ZMK_COMBO(dllr_w,       &curr_win,              RT3 RM3,      BASE_WIN,                         MS_SLOW)
+ZMK_COMBO(grave,        &kp GRAVE,              RT0 RM0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(plus,         &kp PLUS,               RT1 RM1,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(astrk,        &kp ASTRK,              RT2 RM2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(dllr_m,       &curr_mac,              RT3 RM3,      BASE,                             COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(dllr_w,       &curr_win,              RT3 RM3,      BASE_WIN,                         COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 // lower
-ZMK_COMBO(minus,        &kp MINUS,              RM1 RB1,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
-ZMK_COMBO(slash,        &kp SLASH,              RM2 RB2,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
-ZMK_COMBO(equal,        &kp EQUAL,              RM3 RB3,      BASE BASE_WIN NUM NUMF,           MS_SLOW)
+ZMK_COMBO(minus,        &kp MINUS,              RM1 RB1,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(slash,        &kp SLASH,              RM2 RB2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(equal,        &kp EQUAL,              RM3 RB3,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 
 // mouse layer
-ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,                    MS_SLOW)
+ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 /* Gaming Layer */
-ZMK_COMBO(game,         &tog GAME,              LM4 LM0,      BASE BASE_WIN,                    MS_SLOW)
-ZMK_COMBO(base,         &tog BASE_WIN,          LM4 LM0,      GAME,                             MS_SLOW)
-ZMK_COMBO(g_n1,         &kp N1,                 LM1 LM2,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n2,         &kp N2,                 LM2 LM3,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n3,         &kp N3,                 LM1 LM2 LM3,  GAME,                             MS_FAST)
-ZMK_COMBO(g_n4,         &kp N4,                 LB1 LB2,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n5,         &kp N5,                 LB2 LB3,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n6,         &kp N6,                 LB1 LB2 LB3,  GAME,                             MS_FAST)
-ZMK_COMBO(g_n7,         &kp N7,                 LT1 LT2,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n8,         &kp N8,                 LT2 LT3,      GAME,                             MS_FAST)
-ZMK_COMBO(g_n9,         &kp N9,                 LT1 LT2 LT3,  GAME,                             MS_FAST)
-ZMK_COMBO(chat,         &macro_chat,            RM1 RM2,      GAME,                             MS_FAST)
-ZMK_COMBO(g_esc,        &kp ESCAPE,             RM2 RM3,      GAME,                             MS_FAST)
+ZMK_COMBO(game,         &tog GAME,              LM4 LM0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(base,         &tog BASE_WIN,          LM4 LM0,      GAME,                             COMBO_TERM_SLOW, 0)
+ZMK_COMBO(g_n1,         &kp N1,                 LM1 LM2,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n2,         &kp N2,                 LM2 LM3,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n3,         &kp N3,                 LM1 LM2 LM3,  GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n4,         &kp N4,                 LB1 LB2,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n5,         &kp N5,                 LB2 LB3,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n6,         &kp N6,                 LB1 LB2 LB3,  GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n7,         &kp N7,                 LT1 LT2,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n8,         &kp N8,                 LT2 LT3,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_n9,         &kp N9,                 LT1 LT2 LT3,  GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(chat,         &macro_chat,            RM1 RM2,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(g_esc,        &kp ESCAPE,             RM2 RM3,      GAME,                             COMBO_TERM_GAME, 0)
