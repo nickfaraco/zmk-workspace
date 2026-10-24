@@ -25,6 +25,10 @@
 #define xxx &none
 #define ___ &trans
 
+// tapping term definition
+#define TAP_TERM_MS 200
+#define QUICK_TAP_MS 125
+
 
 #include "common/os.dtsi"
 #include "common/macros.dtsi"
@@ -32,7 +36,12 @@
 #include "common/leader.dtsi"
 #include "common/extra_keys.h"
 #if WIRELESS
-    #define BTL1  &bt BT_CLR   &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0
+    // clear the current profile's pairing: double-tap only
+    ZMK_TAP_DANCE(bt_clr,
+        tapping-term-ms = <TAP_TERM_MS>;
+        bindings = <&none>, <&bt BT_CLR>;
+    )
+    #define BTL1  &bt_clr      &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0
     #define BTL2  xxx          &bt BT_SEL 4  &bt BT_SEL 3  &out OUT_TOG
 #else
     #define BTL1  xxx   xxx   xxx   xxx
@@ -43,19 +52,8 @@
     #include "common/mouse.dtsi"
 #endif
 
-// tapping term definition
-#define TAP_TERM_MS 200
-#define QUICK_TAP_MS 125
-
 // macros definition
 #define hyper LG(LC(LS(LALT)))
-
-// layer tap config
-&lt {
-    flavor = "balanced";
-    tapping-term-ms = <TAP_TERM_MS>;
-    quick-tap-ms = <QUICK_TAP_MS>;      // double-tap + hold repeats tap-key
-};
 
 // tune sticky key
 &sk {
@@ -139,10 +137,6 @@ ZMK_MOD_MORPH(curr,
 )
 
 // Tap Dances
-ZMK_TAP_DANCE(prev_next_song,
-    tapping-term-ms = <TAP_TERM_MS>;
-    bindings = <&kp C_NEXT>, <&kp C_PREV>;
-)
 ZMK_TAP_DANCE(screenshot,
     // single-tap: area selector, double-tap: open screenshot app, triple-tap: full-screen
     tapping-term-ms = <TAP_TERM_MS>;
@@ -156,6 +150,15 @@ ZMK_TAP_DANCE(lockscr_win,
     tapping-term-ms = <TAP_TERM_MS>;
     bindings = <&none>, <&kp LG(L)>;
 )
+// quit app: double-tap only
+ZMK_TAP_DANCE(quit,
+    tapping-term-ms = <TAP_TERM_MS>;
+    bindings = <&none>, <&kp LG(Q)>;
+)
+ZMK_TAP_DANCE(quit_win,
+    tapping-term-ms = <TAP_TERM_MS>;
+    bindings = <&none>, <&kp LA(F4)>;
+)
 
 
 /* Nav cluster */
@@ -168,20 +171,32 @@ ZMK_TAP_DANCE(lockscr_win,
     hold-trigger-key-positions = <0>;
 
 &mt { MT_CORE };
+ZMK_HOLD_TAP(mt_bol, bindings = <&masked_bol>, <&kp>; MT_CORE)
+ZMK_HOLD_TAP(mt_eol, bindings = <&masked_eol>, <&kp>; MT_CORE)
 ZMK_HOLD_TAP(mt_home, bindings = <&masked_home>, <&kp>; MT_CORE)
 ZMK_HOLD_TAP(mt_end, bindings = <&masked_end>, <&kp>; MT_CORE)
 
-#define NAV_LEFT  &mt_home 0   LEFT    // tap: left  | long-tap: beginning of line
-#define NAV_RIGHT &mt_end 0    RIGHT   // tap: right | long-tap: end       of line
-#define NAV_UP    &mt LC(HOME) UP      // tap: up    | long-tap: beginning of document
-#define NAV_DOWN  &mt LC(END)  DOWN    // tap: down  | long-tap: end       of document
+// macOS (Nav)
+#define NAV_LEFT    &mt_bol 0    LEFT  // tap: left  | long-tap: beginning of line
+#define NAV_RIGHT   &mt_eol 0    RIGHT // tap: right | long-tap: end       of line
+#define NAV_UP      &mt LG(UP)   UP    // tap: up    | long-tap: beginning of document
+#define NAV_DOWN    &mt LG(DOWN) DOWN  // tap: down  | long-tap: end       of document
+// Linux/Windows (Nav_W)
+#define NAV_LEFT_W  &mt_home 0   LEFT
+#define NAV_RIGHT_W &mt_end 0    RIGHT
+#define NAV_UP_W    &mt LC(HOME) UP
+#define NAV_DOWN_W  &mt LC(END)  DOWN
 
-// mask CTRL when holding left/right to avoid accidental jumps to beginning/end of document
+// mask the word-jump modifier when holding left/right, so that a long-tap
+// inside a word jump doesn't become a jump to beginning/end of document (PC)
+// or a tab switch (macOS)
 #define MASK_MODS(NAME, MODS, BINDING) \
     ZMK_MOD_MORPH(NAME, \
         bindings = <BINDING>, <BINDING>; \
         mods = <MODS>; \
     )
+MASK_MODS(masked_bol,  (MOD_LALT), &kp LG(LEFT))
+MASK_MODS(masked_eol,  (MOD_LALT), &kp LG(RIGHT))
 MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
 MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 
@@ -219,14 +234,10 @@ ZMK_MOD_MORPH(esc_kcancel,
 )
 ZMK_MOD_MORPH(dot_colon,
     bindings = <&kp DOT>, <&kp COLON>;
-    mods = <(MOD_RSFT)>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 ZMK_MOD_MORPH(comma_semi,
     bindings = <&kp COMMA>, <&kp SEMICOLON>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_MOD_MORPH(quest_excl,
-    bindings = <&kp QUESTION>, <&kp EXCLAMATION>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 ZMK_MOD_MORPH(single_to_doublequote,
@@ -306,7 +317,7 @@ ZMK_LAYER(NumF,
 
 ZMK_LAYER(Nav,
     //╭─────────────────┬─────────────────┬─────────────────┬────────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        xxx               &kp LG(LEFT)      &kp LG(Q)         &kp LG(W)        xxx                  &screenshot    &kp LA(LEFT)   NAV_UP         &kp LA(RIGHT)  xxx
+        xxx               &kp LG(LEFT)      &quit             &kp LG(W)        xxx                  &screenshot    &kp LA(LEFT)   NAV_UP         &kp LA(RIGHT)  xxx
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         &hml LCTRL LG(Z)  &hml LALT LG(X)   &hml LSHFT LG(C)  &hml LGUI LG(V)  &kp CAPS             &kp LA(DEL)    NAV_LEFT       NAV_DOWN       NAV_RIGHT      &lockscr
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
@@ -318,9 +329,9 @@ ZMK_LAYER(Nav,
 
 ZMK_LAYER(Nav_W,
     //╭─────────────────┬─────────────────┬─────────────────┬────────────────┬──────────────╮     ╭──────────────┬──────────────┬──────────────┬──────────────┬──────────────╮
-        ___               &kp LA(LEFT)      &kp LA(F4)        &kp LC(W)        ___                  &kp LG(LS(S))  &kp LC(LEFT)   ___            &kp LC(RIGHT)  ___
+        ___               &kp LA(LEFT)      &quit_win         &kp LC(W)        ___                  &kp LG(LS(S))  &kp LC(LEFT)   NAV_UP_W       &kp LC(RIGHT)  ___
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        &hml LGUI LC(Z)   &hml LALT LC(X)   &hml LSHFT LC(C)  &hml LCTRL LC(V) ___                  &kp LC(DEL)    ___            ___            ___            &lockscr_win
+        &hml LGUI LC(Z)   &hml LALT LC(X)   &hml LSHFT LC(C)  &hml LCTRL LC(V) ___                  &kp LC(DEL)    NAV_LEFT_W     NAV_DOWN_W     NAV_RIGHT_W    &lockscr_win
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         ___               ___               &swapper_win      ___              ___                  ___            ___            ___            ___            ___
     //╰─────────────────┴─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
@@ -334,7 +345,7 @@ ZMK_LAYER(Game,
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
         &kp LSHIFT        &kp A             &kp S             &kp D            &kp F                xxx            xxx            xxx            xxx            xxx
     //├─────────────────┼─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┼──────────────┤
-        xxx               xxx               xxx               xxx              xxx                  xxx            xxx            xxx            xxx            xxx
+        xxx               &kp N1            &kp N2            &kp N3           xxx                  xxx            xxx            xxx            xxx            xxx
     //╰─────────────────┴─────────────────┼─────────────────┼────────────────┼──────────────┤     ├──────────────┼──────────────┼──────────────┼──────────────┴──────────────╯
                                             xxx              &kp LCTRL         &kp SPACE            &tog GAME      &mo ADJ        xxx
     //                                    ╰─────────────────┴────────────────┴──────────────╯     ╰──────────────┴──────────────┴──────────────╯

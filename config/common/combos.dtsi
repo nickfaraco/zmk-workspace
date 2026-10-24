@@ -14,13 +14,14 @@
 #define COMBO_TERM_SLOW 40  // vertical and non-adjacent
 #define COMBO_IDLE_FAST 150
 #define COMBO_IDLE_SLOW 50
+#define COMBO_IDLE_NONE 0   // letters on keys that never roll (W F P): must work mid-word
 #define COMBO_TERM_GAME 20  // game layer: no idle requirement while moving
 
 // missing letters
-ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
+ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_NONE)
+ZMK_COMBO(q,            &kp Q,                  LT3 LT2,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_NONE)
+ZMK_COMBO(qu,           &macro_qu,              LT3 LT2 LT1,  BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_NONE)
+ZMK_COMBO(z,            &kp Z,                  LT1 LT3,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_NONE)
 
 /* left-hand side horizontal combos */
 // middle row
@@ -40,7 +41,7 @@ ZMK_COMBO(del,          &kp DEL,                RT1 RT3,      BASE BASE_WIN NAV 
 ZMK_COMBO(del_word,     &kp LA(BSPC),           RT1 RT2 RT3,  BASE,                             COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(del_word_win, &kp LC(BSPC),           RT1 RT2 RT3,  BASE_WIN,                         COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(del_line,     &del_line,              RT1 RT2 RT3,  NAV NAVW,                         COMBO_TERM_FAST, COMBO_IDLE_FAST)
-ZMK_COMBO(quote,        &single_to_doublequote, RT2 RT3,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
+ZMK_COMBO(quote,        &single_to_doublequote, RT2 RT3,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_SLOW)
 // middle row
 ZMK_COMBO(tilde,        &kp TILDE,              RM0 RM1,      BASE BASE_WIN,                    COMBO_TERM_FAST, COMBO_IDLE_FAST)
 ZMK_COMBO(lpar,         &lpar_to_lessthan,      RM1 RM2,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_FAST, COMBO_IDLE_FAST)
@@ -74,20 +75,18 @@ ZMK_COMBO(slash,        &kp SLASH,              RM2 RB2,      BASE BASE_WIN NUM 
 ZMK_COMBO(equal,        &kp EQUAL,              RM3 RB3,      BASE BASE_WIN NUM NUMF,           COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 
+// F11 sits between F10 and F12 on NumF (its own key would be LB0, missing on the zilpzalp)
+ZMK_COMBO(f11,          &kp F11,                LT0 LM0,      NUMF,                             COMBO_TERM_SLOW, COMBO_IDLE_NONE)
+
 // mouse layer
 ZMK_COMBO(mouse,        &mo MSE,                LM4 LH0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
 
 /* Gaming Layer */
 ZMK_COMBO(game,         &tog GAME,              LM4 LM0,      BASE BASE_WIN,                    COMBO_TERM_SLOW, COMBO_IDLE_SLOW)
-ZMK_COMBO(game_exit,    &tog GAME,              LM4 LM0,      GAME,                             COMBO_TERM_SLOW, 0)
-ZMK_COMBO(g_n1,         &kp N1,                 LM1 LM2,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n2,         &kp N2,                 LM2 LM3,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n3,         &kp N3,                 LM1 LM2 LM3,  GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n4,         &kp N4,                 LB1 LB2,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n5,         &kp N5,                 LB2 LB3,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n6,         &kp N6,                 LB1 LB2 LB3,  GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n7,         &kp N7,                 LT1 LT2,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n8,         &kp N8,                 LT2 LT3,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_n9,         &kp N9,                 LT1 LT2 LT3,  GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(chat,         &macro_chat,            RM1 RM2,      GAME,                             COMBO_TERM_GAME, 0)
-ZMK_COMBO(g_esc,        &kp ESCAPE,             RM2 RM3,      GAME,                             COMBO_TERM_GAME, 0)
+ZMK_COMBO(game_exit,    &tog GAME,              LM4 LM0,      GAME,                             COMBO_TERM_SLOW, COMBO_IDLE_NONE)
+// 1-3 are keys on the bottom row; 4-6 are combos there, away from WASD
+ZMK_COMBO(g_n4,         &kp N4,                 LB3 LB2,      GAME,                             COMBO_TERM_GAME, COMBO_IDLE_NONE)
+ZMK_COMBO(g_n5,         &kp N5,                 LB2 LB1,      GAME,                             COMBO_TERM_GAME, COMBO_IDLE_NONE)
+ZMK_COMBO(g_n6,         &kp N6,                 LB3 LB2 LB1,  GAME,                             COMBO_TERM_GAME, COMBO_IDLE_NONE)
+ZMK_COMBO(chat,         &macro_chat,            RM1 RM2,      GAME,                             COMBO_TERM_GAME, COMBO_IDLE_NONE)
+ZMK_COMBO(g_esc,        &kp ESCAPE,             RM2 RM3,      GAME,                             COMBO_TERM_GAME, COMBO_IDLE_NONE)
