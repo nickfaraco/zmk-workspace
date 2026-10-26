@@ -1,7 +1,8 @@
-# Expose the repo root as a Zephyr module so ZMK finds the custom shields in
-# boards/shields. (A zephyr/module.yml at the root would clash with the
-# west-managed Zephyr checkout.)
+# Expose config/hardware as a Zephyr module so ZMK finds the custom shields in
+# config/hardware/boards/shields. They live inside config/ because CI builds
+# from an isolated copy of config/ only; config/boards itself is deprecated
+# by ZMK, hence the extra directory.
 name: zmk-workspace-shields
 build:
   settings:
-    board_root: ..
+    board_root: hardware
