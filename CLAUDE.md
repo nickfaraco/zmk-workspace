@@ -32,7 +32,7 @@ just clean
 
 Validate keymap changes by building. `just test` is a snapshot harness for developing the ZMK *modules*, not this keymap. Build warnings that come from ZMK/Zephyr itself and can be ignored: `Deprecated symbol KSCAN`, the `behavior_tap_dance.c` const warning, `ZMK_USB` on the peripheral half, and the RP2040 dtc `memory@20000000` note.
 
-CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**`, `boards/**` or `build.yaml`. `bump-west.yml` opens weekly pin-bump PRs.
+CI: `.github/workflows/build-nix.yml` builds on pushes/PRs touching `config/**` or `build.yaml`. `bump-west.yml` opens weekly pin-bump PRs.
 
 ## Keymap architecture
 
@@ -43,7 +43,7 @@ All boards share a single keymap: **`config/base.keymap`**. Each per-board keyma
 - `ALPHA_23332` / `ALPHA_13332`: selects how the keys missing on the zilpzalp are bound, in `common/extra_keys.h`. `ALPHA_13332` (the default; zilpzalp) leaves 28 active keys. `ALPHA_23332` (chocofi) also activates the top outer corners (`LTL` = V, `RTR` = quote). The bottom corners, bottom inner keys and outer thumbs stay unused on every board, because they're hard to reach. Anything on a corner must stay reachable through its combo, so the 28-key layout is complete on its own.
 - `dummy.keymap`, which `just draw` parses, uses the chocofi's defines
 
-The keymap is always written as a full **36-key 3x5+3 grid** using `zmk-helpers` key labels (`LT0…RH2`, from `zmk-helpers/key-labels/36.h`, which also provides `KEYS_L`/`KEYS_R`/`THUMBS`). Boards with fewer keys map their physical matrix onto that grid in their shield overlay. For example, `boards/shields/zilpzalp/zilpzalp.overlay` defines `square_transform`, which places nonexistent keys on unused row 9. When you change bindings, keep every layer at 36 positions, and refer to keys in combos/HRMs by label, never by numeric index.
+The keymap is always written as a full **36-key 3x5+3 grid** using `zmk-helpers` key labels (`LT0…RH2`, from `zmk-helpers/key-labels/36.h`, which also provides `KEYS_L`/`KEYS_R`/`THUMBS`). Boards with fewer keys map their physical matrix onto that grid in their shield overlay. For example, `config/hardware/boards/shields/zilpzalp/zilpzalp.overlay` defines `square_transform`, which places nonexistent keys on unused row 9. When you change bindings, keep every layer at 36 positions, and refer to keys in combos/HRMs by label, never by numeric index.
 
 Layers: indices are `#define`d at the top of `base.keymap` (`BASE`, `BASE_WIN`, `NUM`, `NUMF`, `NAV`, `NAVW`, `GAME`, `ADJ`, `MSE`) and used in bindings/combos. The `ZMK_LAYER(...)` blocks must appear in the same order, under *mixed-case* names (`Base`, `Num`, `Nav`, …). An all-caps name like `NUM` would be macro-expanded to its index, and the display name would become a number. `just draw`'s overview recipe in the `Justfile` refers to the layers by these names. `Base_W`/`Nav_W` are macOS→Linux/Windows overlays that swap GUI/CTRL on homerow mods and shortcuts, and `Nav_W` is a conditional layer (`BASE_WIN` + `NAV`). Bindings assume macOS by default (e.g. Nav's long-tap jumps are Cmd+arrows; Home/End and Ctrl+Home/End live in `Nav_W`); put PC variants in the overlays (or per-layer combos), never in a separate copy of a layer.
 
@@ -53,7 +53,7 @@ OS handling lives in `common/os.dtsi`. The OS is chosen by activating `BASE_WIN`
 
 Homerow mods (`hml`/`hmr`) use urob's "timeless" HRM settings (large tapping-term, `require-prior-idle-ms`, positional hold-tap on the opposite hand + thumbs). Read the README's HRM section before tuning them.
 
-Board-level Kconfig goes in `config/<board>.conf`. The custom shields (neither ships with ZMK) live in `boards/shields/` at the repo root. They're exposed as a Zephyr module through `config/zephyr/module.yml` (`board_root: ..`). Zephyr scans every west project for modules, including the manifest project `config/`. The module file can't sit at the repo root, because the root's `zephyr/` directory is the west-managed Zephyr checkout. Don't reintroduce `config/boards/`, which ZMK has deprecated.
+Board-level Kconfig goes in `config/<board>.conf`. The custom shields (neither ships with ZMK) live in `config/hardware/boards/shields/`. They're exposed as a Zephyr module through `config/zephyr/module.yml` (`board_root: hardware`). Locally, Zephyr scans every west project for modules, including the manifest project `config/`. The shields must stay inside `config/`, because CI (urob's `build-user-config` action) builds from an isolated copy of `config/` alone. The module file can't sit at the repo root anyway, because the root's `zephyr/` directory is the west-managed Zephyr checkout. Don't use `config/boards/` directly, which ZMK has deprecated.
 
 ## Upgrading ZMK
 
