@@ -13,7 +13,7 @@
 // Backspace (L+U) also needs a pause before it: without one, L-U rolls inside
 // words ("value", "plus") fired it.
 #define COMBO_TERM_BSPC 30
-#define COMBO_IDLE_BSPC 150
+#define COMBO_IDLE_BSPC 100
 
 // missing letters
 ZMK_COMBO(v,            &kp V,                  LT2 LT1,      BASE BASE_WIN,                    MS_SLOW)
